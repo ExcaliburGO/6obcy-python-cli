@@ -9,6 +9,7 @@ A 6obcy command-line client built in Python that is simple and easy to use.
 - Ring a bell when found "K"
 - Log all conversations into files
 - Save all solved captchas (in case you want to have some fun trying to crack them using machine learning)
+- Changes the captcha after 3 failed solving attempts
 - Properly integrates with 2Captcha API and reports both well and wrongly resolved captchas
 
 ## Installation
