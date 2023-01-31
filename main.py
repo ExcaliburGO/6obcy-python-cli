@@ -11,6 +11,7 @@ import beepy
 import sys
 solver = TwoCaptcha(sys.argv[1])
 INITIAL_MESSAGE = "m 18"
+LOCATION_CODE="0"
 def date():
 	return str(round(time.time() * 1000))
 class Client:
@@ -44,7 +45,7 @@ class Client:
 		payload["ev_data"]["val"]=typing
 		self.ws.send("4"+json.dumps(payload))
 	def startSearch(self):
-		self.ws.send('4{"ev_name":"_sas","ev_data":{"channel":"main","myself":{"sex":0,"loc":4},"preferences":{"sex":0,"loc":4}},"ceid":'+str(self.ceid)+'}')
+		self.ws.send('4{"ev_name":"_sas","ev_data":{"channel":"main","myself":{"sex":0,"loc":'+LOCATION_CODE+'},"preferences":{"sex":0,"loc":'+LOCATION_CODE+'}},"ceid":'+str(self.ceid)+'}')
 		self.ceid+=1
 	def sendMessage(self, msg):
 		if self.istalk:
