@@ -11,7 +11,7 @@ import beepy
 import sys
 solver = TwoCaptcha(sys.argv[1])
 INITIAL_MESSAGE = "m 18"
-LOCATION_CODE="0"
+LOCATION_CODE=sys.argv[2]
 def date():
 	return str(round(time.time() * 1000))
 class Client:
@@ -75,6 +75,17 @@ class Client:
 			self.ceid+=1
 			self.ws.send("4"+json.dumps(payload))
 			self.istalk=False
+	def reportStranger(self):
+		payload={}
+		payload["ev_name"]="_reptalk"
+		payload["ev_data"]={}
+		payload["ev_data"]["ckey"]=self.ckey
+		payload["ev_data"]["details"]={}
+		payload["ev_data"]["details"]["reason"]="spam"
+		payload["ev_data"]["details"]["block"]=True
+		payload["ceid"]=self.ceid
+		self.ceid+=1
+		self.ws.send("4"+json.dumps(payload))
 	def on_message(self, ws, message):
 		type=int(message[0])
 		if type==3: return
@@ -157,6 +168,7 @@ class Client:
 						if len(msg)<5 and 'km' not in msg.lower() and 'm' in msg.lower():
 							print("SKIPPING M", flush=True)
 							os.remove(self.logfile)
+							self.reportStranger()
 							self.endTalk()
 						else:
 							if 'km' not in msg.lower() and 'k'==msg.lower()[0]:

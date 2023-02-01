@@ -25,8 +25,9 @@ pip3 install 2captcha-python beepy websocket-client
 
 ## Usage
 ```
-python3 main.py <YOUR_API_KEY>
+python3 main.py <YOUR_API_KEY> <LOCATION_CODE>
 ```
+Whereas `<YOUR_API_KEY>` is your 2Captcha API key and `<LOCATION_CODE>` is a code from 0 to 17 determining selected region (you can check it with F12->Network->Find websocket connection)
 Just wait for beep and type :)
 If you want to close the conversation, type `:q`
 
